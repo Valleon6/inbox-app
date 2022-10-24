@@ -4,8 +4,6 @@ import com.datastax.oss.driver.api.core.CqlSessionBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.file.Path;
 
+
 @SpringBootApplication
 @RestController
-@ConfigurationPropertiesScan
-public class InboxAppApplication {
+//@ConfigurationPropertiesScan
+public class InboxApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InboxAppApplication.class, args);
+		SpringApplication.run(InboxApp.class, args);
 	}
 //	@RequestMapping("/user")
 //	public String user(@AuthenticationPrincipal OAuth2User principal) {
