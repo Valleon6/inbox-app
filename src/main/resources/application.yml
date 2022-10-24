@@ -1,4 +1,3 @@
-
 spring:
   security:
     oauth2:
@@ -20,11 +19,12 @@ spring:
         init-query-timeout: 10s
 
 
-  astra.db:
-      id: c15315a3-a40d-4c50-b1d4-30b93a943156-1
-      region: us-east1
-      keyspace: main
-      application.token: AstraCS:HMzHimRNJNHExltIYvSdmSoI:1f4eb5f3386d26103e88ed667854c35447473acac9f3bbd3b9d2def948128fce
+
+astra.db:
+  id: c15315a3-a40d-4c50-b1d4-30b93a943156-1
+  region: us-east1
+  keyspace: main
+  application.token: AstraCS:HMzHimRNJNHExltIYvSdmSoI:1f4eb5f3386d26103e88ed667854c35447473acac9f3bbd3b9d2def948128fce
 
   datastax.astra:
     secure-connect-bundle: secure-connect.zip
