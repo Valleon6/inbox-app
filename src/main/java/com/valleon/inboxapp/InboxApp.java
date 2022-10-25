@@ -23,7 +23,7 @@ import java.nio.file.Path;
 @RestController
 public class InboxApp {
 
-	//@Autowired
+	@Autowired
 	FolderRepository folderRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(InboxApp.class, args);
