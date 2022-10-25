@@ -1,6 +1,10 @@
 package com.valleon.inboxapp;
 
 import com.datastax.oss.driver.api.core.CqlSessionBuilder;
+import com.datastax.oss.driver.api.core.uuid.Uuids;
+import com.valleon.inboxapp.emailList.EmailListItem;
+import com.valleon.inboxapp.emailList.EmailListItemKey;
+import com.valleon.inboxapp.emailList.EmailListItemRepository;
 import com.valleon.inboxapp.folders.Folder;
 import com.valleon.inboxapp.folders.FolderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.UUID;
 
 
 @SpringBootApplication
@@ -24,7 +30,11 @@ import java.nio.file.Path;
 public class InboxApp {
 
 	@Autowired
-	FolderRepository folderRepository;
+	private FolderRepository folderRepository;
+	@Autowired
+	private EmailListItemRepository emailListItemRepository;
+	
+
 	public static void main(String[] args) {
 		SpringApplication.run(InboxApp.class, args);
 	}
@@ -52,5 +62,20 @@ public class InboxApp {
 		folderRepository.save(new Folder("Valleon", "sent", "Green"));
 		folderRepository.save(new Folder("Valleon", "important", "yellow"));
 
+
+		for (int i = 0; i< 10; i++){
+			EmailListItemKey key = new EmailListItemKey();
+			key.setId("Valleon");
+			key.setLabel("inbox");
+			key.setTimeUUID(Uuids.timeBased());
+
+			EmailListItem item = new EmailListItem();
+			item.setKey(key);
+			item .setTo(Arrays.asList("Valleon"));
+			item.setSubject("Subject " + i );
+			item.setUnread(true);
+
+			emailListItemRepository.save( item);
+		}
 	}
 }
