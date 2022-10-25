@@ -16,7 +16,7 @@ import java.io.File;
 @ConfigurationProperties(prefix = "datastax.astra")
 public class DataStaxAstraProperties {
 
-    
+
     private File secureConnectBundle;
 
 }

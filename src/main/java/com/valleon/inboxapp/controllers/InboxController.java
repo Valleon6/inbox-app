@@ -1,22 +1,38 @@
 package com.valleon.inboxapp.controllers;
 
+import com.valleon.inboxapp.folders.Folder;
+import com.valleon.inboxapp.folders.FolderRepository;
 import io.netty.util.internal.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class InboxController {
 
-    @GetMapping(value =  "/")
-    private String homePage(@AuthenticationPrincipal OAuth2User principal){
+    @Autowired
+    private FolderRepository folderRepository;
 
-        if(principal == null || StringUtils.hasText(principal.getAttribute("name"))){
+    @GetMapping(value =  "/")
+    private String homePage(@AuthenticationPrincipal OAuth2User principal, Model model){
+
+        if(principal == null || StringUtils.hasText(principal.getAttribute("login"))){
             return "index";
-        }else{
+        }
+        {
+            String userId = principal.getAttribute("login");
+           List<Folder> userFolders =  folderRepository.findAllById(userId);
+
+           model.addAttribute("userFolders", userFolders);
+
             return "inbox-app";
         }
     }
+
 }
