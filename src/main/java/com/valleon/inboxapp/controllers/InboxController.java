@@ -1,5 +1,6 @@
 package com.valleon.inboxapp.controllers;
 
+import com.valleon.inboxapp.emailList.EmailListItem;
 import com.valleon.inboxapp.emailList.EmailListItemRepository;
 import com.valleon.inboxapp.folders.Folder;
 import com.valleon.inboxapp.folders.FolderRepository;
@@ -40,6 +41,10 @@ public class InboxController {
             model.addAttribute("defaultFolders", defaultFolders);
 
             //Fetch messages
+            String folderLabel = "Inbox";
+           List<EmailListItem> emailList =  emailListItemRepository
+                   .findAllByKey_IdAndKey_Label(userId, folderLabel);
+           model.addAttribute("emailList", emailList);
 
             return "inbox-app";
         }
